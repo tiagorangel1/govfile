@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>free storage, courtesy of the us gov</title>
+    <style>
+      * {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+        box-sizing: border-box;
+      }
+      body {
+        max-width: 560px;
+        margin: 5em auto;
+        background-color: #79caf5;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      footer {
+        color: rgba(0, 0, 0, 0.419);
+        text-align: left;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding-top: 1em;
+        margin-top: 4em;
+        width: 100%;
+        padding-left: .5em;
+        padding-right: .5em;
+      }
+      h1 {
+        font-weight: 400;
+        font-size: 1.5em;
+        color: rgba(0, 0, 0, 0.8);
+      }
+      h1 b {
+        font-weight: 500;
+        color: rgba(0, 0, 0, 1);
+      }
+
+      #file {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        cursor: pointer;
+        font-size: 0px;
+        opacity: 0;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .open-file-button {
+        box-shadow: none;
+        border-radius: 24px;
+        position: relative;
+        flex-direction: column;
+        gap: 8px;
+        padding: 28px 32px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14.5px;
+        background-color: #ffffff53;
+        color: #000000;
+        border: none;
+        text-align: center;
+        cursor: pointer;
+        min-width: 338px;
+        transition: box-shadow 0.2s, background-color 0.2s;
+        margin-top: 2em;
+      }
+      .open-file-button:hover {
+        background-color: #ffffff6e;
+      }
+      .dashed-stroke {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        bottom: 0;
+        pointer-events: none;
+      }
+      .open-file-icon {
+        display: flex;
+      }
+      .open-file-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        max-width: 300px;
+      }
+      .open-title {
+        font-size: 18px;
+      }
+      .accept-list {
+        font-size: 12.5px;
+        font-weight: 500;
+        color: #818181;
+        white-space: pre-line;
+        margin: 0px;
+      }
+
+      .modal {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background-color: rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(1px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-content {
+        background: white;
+        max-width: 400px;
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+          rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        padding: 2em;
+      }
+
+      .modal-content svg {
+        width: 38px;
+        height: 38px;
+      }
+
+      .modal-content p {
+        font-size: 18px;
+        margin: 0px;
+        margin-top: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- prettier-ignore -->
+    <h1>
+      <b>govstore</b>. free storage,
+      <br />
+      courtesy of the us gov
+    </h1>
+
+    <label for="file">
+      <button class="open-file-button">
+        <input
+          id="file"
+          name="file"
+          type="file"
+          accept=".gif,.jpg,.png,.tif,.txt,.rtf,.pdf,.doc,.docx"
+        />
+        <div class="dashed-stroke">
+          <svg
+            width="100%"
+            height="100%"
+            xmlns="http://www.w3.org/2000/svg"
+            style="border-radius: 24px; pointer-events: none"
+          >
+            <rect
+              width="100%"
+              height="100%"
+              fill="none"
+              rx="24"
+              ry="24"
+              style="
+                width: 100%;
+                height: 100%;
+                stroke-width: 5;
+                stroke-dashoffset: 3;
+                stroke-linecap: square;
+                stroke-dasharray: 10, 15;
+                stroke: #383838;
+              "
+            ></rect>
+          </svg>
+        </div>
+        <div class="open-file-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            style="width: 32px; height: 32px; stroke-width: 1.8px"
+            class="icon-tabler tabler-icon-upload"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+            <path d="M7 9l5 -5l5 5" />
+            <path d="M12 4l0 12" />
+          </svg>
+        </div>
+
+        <div class="open-file-text">
+          <div class="open-title">drag or select a file</div>
+          <!-- prettier-ignore -->
+          <p class="accept-list">up to 100 mb. supports gif, jpg, png,
+            tif, txt, rtf, pdf, doc &amp; docx
+          </p>
+        </div>
+      </button>
+    </label>
+
+    <footer>
+      <p>this website is not affiliated with the us government in any way.</p>
+      <p>api: POST / with your file as `file` in formdata</p>
+    </footer>
+  </body>
+  <script>
+    const visibleInput = document.querySelector(".open-file-button");
+    const input = document.querySelector("#file");
+
+    input.addEventListener("change", async (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const modal = document.createElement("div");
+      modal.classList.add("modal");
+      modal.innerHTML = `
+        <div class="modal-content">
+          <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><style>.spinner_z9k8{transform-origin:center;animation:spinner_StKS .75s infinite linear}@keyframes spinner_StKS{100%{transform:rotate(360deg)}}</style><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/><path d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z" class="spinner_z9k8"/></svg>
+          <p>uploading...</p>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      const formData = new FormData();
+      formData.append("file", file, file.name);
+
+      input.value = "";
+
+      const { url, success } = await (
+        await fetch("/", {
+          body: formData,
+          method: "POST",
+        })
+      ).json();
+
+      if (!success || !url) {
+        modal.innerHTML = `
+        <div class="modal-content">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p>upload failed</p>
+          <p style="font-size: 14px; margin-top: 8px;">an error occurred :(</p>
+          <button onclick="document.body.removeChild(this.closest('.modal'))" style="margin-top: 16px; padding: 8px 16px; background: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">Close</button>
+        </div>
+      `;
+      }
+
+      window.open(url);
+      document.body.removeChild(modal);
+    });
+
+    input.addEventListener("dragenter", function () {
+      document.querySelector(".open-title").innerText = "drop the file here!";
+    });
+    input.addEventListener("dragleave", function () {
+      document.querySelector(".open-title").innerText = "drag or select a file";
+    });
+    input.addEventListener("drop", function () {
+      document.querySelector(".open-title").innerText = "drag or select a file";
+    });
+  </script>
+</html>
