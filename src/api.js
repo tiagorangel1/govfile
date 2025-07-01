@@ -19,9 +19,10 @@ export default new Elysia()
       scoping: "scoped",
     })
   )
-  .onError(() => {
+  .onError(({ error }) => {
     return {
       success: false,
+      message: error.message
     };
   })
   .post("/", async ({ body, set }) => {
@@ -125,7 +126,12 @@ export default new Elysia()
       .querySelector("label.option .file a[href]")
       .getAttribute("href");
 
-    if (!url) throw new Error("missing url");
+    if (!url) {
+      return {
+        success: false,
+        message: "missing url",
+      };
+    }
 
     return {
       success: true,
