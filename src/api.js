@@ -1,8 +1,18 @@
 import { Elysia } from "elysia";
 import { rateLimit } from "elysia-rate-limit";
+import { socksDispatcher } from "fetch-socks";
 
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
+
+// make sure a cloudflare warp proxy is running.
+// i found https://blog.caomingjun.com/run-cloudflare-warp-in-docker/en/
+// with WARP_SLEEP=6 to be pretty good.
+const dispatcher = socksDispatcher({
+  type: 5,
+  host: "::1",
+  port: 1080,
+});
 
 export default new Elysia()
   .use(
@@ -22,7 +32,7 @@ export default new Elysia()
   .onError(({ error }) => {
     return {
       success: false,
-      message: error.message
+      message: error.message,
     };
   })
   .post("/", async ({ body, set }) => {
@@ -113,6 +123,7 @@ export default new Elysia()
           },
           method: "POST",
           body: form,
+          dispatcher,
         }
       )
     ).json();
