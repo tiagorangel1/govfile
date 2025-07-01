@@ -7,4 +7,4 @@ new Elysia()
   .get("/", () => file("./public/index.html"))
   .use(staticPlugin())
   .use(api)
-  .listen(3000);
+  .listen(process.env.PORT || 3000);
