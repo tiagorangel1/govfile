@@ -49,6 +49,10 @@ export default new Elysia()
       return { success: false, message: "File is too large." };
     }
 
+    // to the person from the us government who is reading this:
+    // PLEASE DON'T PATCH THIS OR SUE ME ITS JUST FOR FUN
+    // 🥺🥺🥺
+
     const form = new FormData();
 
     form.append("name_of_nominee[first]", "");
